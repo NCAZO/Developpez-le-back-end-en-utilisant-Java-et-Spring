@@ -1,52 +1,44 @@
 package com.openclassrooms.chatop.controllers;
 
-import com.openclassrooms.chatop.DTO.Requests.LoginRequest;
-import com.openclassrooms.chatop.DTO.Requests.RegisterRequest;
-import com.openclassrooms.chatop.DTO.Responses.AuthResponse;
+import com.openclassrooms.chatop.dto.requests.LoginRequestDto;
+import com.openclassrooms.chatop.dto.requests.RegisterRequestDto;
+import com.openclassrooms.chatop.dto.responses.AuthResponseDto;
 import com.openclassrooms.chatop.models.User;
-import com.openclassrooms.chatop.repository.UserRepository;
 import com.openclassrooms.chatop.services.AuthService;
 import com.openclassrooms.chatop.services.JwtService;
 import com.openclassrooms.chatop.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
     @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
-
-    @Autowired
-    JwtService jwtService;
-    @Autowired
     private AuthService authService;
+
+    @Autowired
+    private JwtService jwtService;
+
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        return authService.login(loginRequest);
+    public ResponseEntity<AuthResponseDto> login(@Valid @RequestBody LoginRequestDto loginRequestDto) {
+        String token = authService.login(loginRequestDto.getEmail(), loginRequestDto.getPassword());
+        return ResponseEntity.ok(new AuthResponseDto(token));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
-        return authService.register(registerRequest);
+    public ResponseEntity<AuthResponseDto> register(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
+        String token = authService.register(registerRequestDto.getEmail(), registerRequestDto.getName(), registerRequestDto.getPassword());
+        return ResponseEntity.ok(new AuthResponseDto(token));
     }
 
 //	@PostMapping("/logOut")
@@ -56,10 +48,23 @@ public class AuthController {
 //				.body(new MessageResponse("You've been signed out!"));
 //	}
 
+//    @GetMapping("/me")
+//    public ResponseEntity<User> getMe(HttpServletRequest request) throws Exception {
+//        String authHeader = request.getHeader("Authorization");
+//
+//        if(authHeader == null || !authHeader.startsWith("Bearer ")){
+//            throw new Exception("Exception message");
+//        }
+//
+//        String token = authHeader.substring(7);
+//
+//        // Extraire le username du token
+//        String username = jwtService.getUserNameFromJwtToken(token);
+//        return ResponseEntity.ok(userService.getUserByEmail(username));
+//    }
+
     @GetMapping("/me")
-    public User getMe() {
-        User newUSer = authService.getMe();
-        newUSer.setPassword(null);
-        return newUSer;
+    public ResponseEntity<User> getMe(HttpServletRequest request) throws Exception {
+        return authService.getMe(request);
     }
 }

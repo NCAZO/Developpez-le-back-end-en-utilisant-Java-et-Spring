@@ -1,24 +1,13 @@
-package com.openclassrooms.chatop.DTO.Requests;
+package com.openclassrooms.chatop.dto.requests;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class LoginRequest {
-
-    private String name;
-
-    //@NotBlank
+public class LoginRequestDto {
+    @NotBlank
     private String email;
 
     @NotBlank
     private String password;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getEmail() {
         return email;
@@ -35,4 +24,6 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

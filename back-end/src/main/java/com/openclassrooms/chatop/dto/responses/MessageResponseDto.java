@@ -1,9 +1,9 @@
-package com.openclassrooms.chatop.DTO.Responses;
+package com.openclassrooms.chatop.dto.responses;
 
-public class MessageResponse {
+public class MessageResponseDto {
     private String message;
 
-    public MessageResponse(String message) {
+    public MessageResponseDto(String message) {
         this.message = message;
     }
 

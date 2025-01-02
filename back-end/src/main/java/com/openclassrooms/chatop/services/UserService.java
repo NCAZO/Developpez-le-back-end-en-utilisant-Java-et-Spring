@@ -2,13 +2,16 @@ package com.openclassrooms.chatop.services;
 
 import com.openclassrooms.chatop.models.User;
 import com.openclassrooms.chatop.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -37,13 +40,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-//	public Long getUserIdByName(Authentication authentication) {
-//		User userFind = userRepository.findByName(authentication.getName());
-//		if (userFind == null) {
-//			return null;
-//		}
-//		return userFind.getId();
-//	}
+    public User getUserByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        if(user.isPresent()){
+            return user.get();
+        }  throw  new RuntimeException(email+ "does not exist");
+    }
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -69,5 +71,12 @@ public class UserService {
             throw new Exception("User do not exist !");
         }
         return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // On cherche l'utilisateur par son email dans ce cas
+        return userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + username));
     }
 }

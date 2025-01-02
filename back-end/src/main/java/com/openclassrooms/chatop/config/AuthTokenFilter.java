@@ -2,6 +2,7 @@ package com.openclassrooms.chatop.config;
 
 import com.openclassrooms.chatop.services.JwtService;
 import com.openclassrooms.chatop.services.UserDetailsServiceImpl;
+import com.openclassrooms.chatop.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,38 +24,30 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private JwtService jwtService;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private UserService userService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        try {
-            String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
-            if (authorization != null && !authorization.isEmpty()) {
-                String jwtoken = authorization.replace("Bearer ", "");
-                if (jwtoken != null && jwtService.validateJwtToken(jwtoken)) {
-                    String username = jwtService.getUserNameFromJwtToken(jwtoken);
-
-                    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(userDetails,
-                                    null,
-                                    userDetails.getAuthorities());
-
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            String userName = jwtService.extractUserName(token);
+            if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails user = userService.loadUserByUsername(userName);
+                if (jwtService.validateToken(token, user)) {
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            user, null, user.getAuthorities());
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
-        } catch (Exception e) {
-            logger.error("Cannot set user authentication: {}", e);
         }
-
         filterChain.doFilter(request, response);
-    }
+     }
 
     private String parseJwt(HttpServletRequest request) {
-        String jwt = jwtService.getJwtFromCookies(request);
-        return jwt;
+        return jwtService.getJwtFromCookies(request);
     }
 }

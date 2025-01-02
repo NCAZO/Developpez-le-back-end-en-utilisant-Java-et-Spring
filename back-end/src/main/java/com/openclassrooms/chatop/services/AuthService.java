@@ -1,22 +1,15 @@
 package com.openclassrooms.chatop.services;
 
 
-import com.openclassrooms.chatop.DTO.Requests.LoginRequest;
-import com.openclassrooms.chatop.DTO.Requests.RegisterRequest;
-import com.openclassrooms.chatop.DTO.Responses.AuthResponse;
-import com.openclassrooms.chatop.DTO.Responses.MessageResponse;
 import com.openclassrooms.chatop.models.User;
 import com.openclassrooms.chatop.repository.UserRepository;
-import jakarta.validation.Valid;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.Instant;
 import java.util.Date;
@@ -26,7 +19,6 @@ import java.util.Optional;
 public class AuthService {
 
     private final AuthenticationManager authenticationManager;
-    //    private final JwtUtils jwtUtils;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
@@ -44,11 +36,33 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
-        if (userService.existsByEmail(registerRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already taken!"));
+//    public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest registerRequest) {
+//        if (userService.existsByEmail(registerRequest.getEmail())) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Error: Email is already taken!"));
+//        }
+//
+//        Long time = Date.from(Instant.now()).getTime();
+//
+//        // Create new user's account
+//        User newUser = new User();
+//        newUser.setId(null);
+//        newUser.setName(registerRequest.getName());
+//        newUser.setEmail(registerRequest.getEmail());
+//        newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+//
+//        newUser.setCreated_at(new Date(time));
+//        newUser.setUpdated_at(new Date());
+//
+//        userService.createUser(newUser);
+//
+//        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+//    }
+
+    public String register(String email, String name, String password) {
+        if (userService.existsByEmail(email)) {
+            throw new IllegalArgumentException("Email already exist !");
         }
 
         Long time = Date.from(Instant.now()).getTime();
@@ -56,55 +70,46 @@ public class AuthService {
         // Create new user's account
         User newUser = new User();
         newUser.setId(null);
-        newUser.setName(registerRequest.getName());
-        newUser.setEmail(registerRequest.getEmail());
-        newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        newUser.setName(name);
+        newUser.setEmail(email);
+        newUser.setPassword(passwordEncoder.encode(password));
 
         newUser.setCreated_at(new Date(time));
 
         userService.createUser(newUser);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return jwtService.generateToken(email);
     }
 
-    public ResponseEntity<AuthResponse> login(LoginRequest loginRequest) {
+    public String login(String email, String password) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(email, password));
 
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getName(), loginRequest.getPassword()));
+        return jwtService.generateToken(email);
+    }
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+    public ResponseEntity<User> getUserById(Long id) {
 
-            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        Optional<User> user = userRepository.findById(id);
 
-            String token = jwtService.generateToken(userDetails);
-            return ResponseEntity.ok().body(new AuthResponse(token, "200", "Token generated"));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(new AuthResponse(null, "400", "Unknown user"));
+        if (user.isPresent()) {
+            return ResponseEntity.ok(user.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    public ResponseEntity<User> getMe(HttpServletRequest request) throws Exception {
+        String authHeader = request.getHeader("Authorization");
+
+        if(authHeader == null || !authHeader.startsWith("Bearer ")){
+            throw new Exception("Exception message");
         }
 
+        String token = authHeader.substring(7);
 
+        // Extraire le username du token
+        String username = jwtService.getUserNameFromJwtToken(token);
+        return ResponseEntity.ok(userService.getUserByEmail(username));
     }
-
-    public User getUserById(Long id) {
-        if (!userRepository.findById(id).isPresent()) {
-            throw new RuntimeException("User not found");
-        }
-        return userRepository.findById(id).get();
-    }
-
-    public User getMe() {
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-
-        Authentication authentication = securityContext.getAuthentication();
-
-        String username = authentication.getName();
-
-        Optional<User> _user = userService.findUserByName(username);
-
-        //_user.get().setPassword(null);
-
-        return _user.get();
-    }
-
 }

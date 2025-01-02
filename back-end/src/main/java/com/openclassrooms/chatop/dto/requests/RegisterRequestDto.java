@@ -1,10 +1,10 @@
-package com.openclassrooms.chatop.DTO.Requests;
+package com.openclassrooms.chatop.dto.requests;
 
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.Date;
 
-public class RegisterRequest {
+public class RegisterRequestDto {
 
     @NotBlank(message = "L'email est obligatoire !")
     private String email;

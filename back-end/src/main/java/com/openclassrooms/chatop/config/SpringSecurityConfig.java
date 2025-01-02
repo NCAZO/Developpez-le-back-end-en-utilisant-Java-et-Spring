@@ -21,16 +21,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableMethodSecurity
-//(securedEnabled = true,
-//jsr250Enabled = true,
-//prePostEnabled = true) // by default
 public class SpringSecurityConfig {
 
-//  @Value("${spring.h2.console.path}")
-//  private String h2ConsolePath;
-
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
@@ -69,33 +63,36 @@ public class SpringSecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth
-                                .requestMatchers(
-                                        // -- Swagger UI v2
-                                        "/v2/api-docs",
-                                        "/swagger-resources",
-                                        "/swagger-resources/**",
-                                        "/configuration/ui",
-                                        "/configuration/security",
-                                        "/swagger-ui.html",
-                                        "/webjars/**",
-                                        // -- Swagger UI v3 (OpenAPI)
-                                        "/v3/api-docs/**",
-                                        "/swagger-ui/**"
-                                )
-                                .permitAll()
-                                .requestMatchers("/api/auth/login").permitAll()
-                                .requestMatchers("/api/auth/register").permitAll()
-//                                .requestMatchers("/", "/public/**").permitAll()
-                                .anyRequest().authenticated()
+                                auth
+                                        .requestMatchers(
+                                                // -- Swagger UI v2
+                                                "/v2/api-docs",
+                                                "/swagger-resources",
+                                                "/swagger-resources/**",
+                                                "/configuration/ui",
+                                                "/configuration/security",
+                                                "/swagger-ui.html",
+                                                "/webjars/**",
+                                                // -- Swagger UI v3 (OpenAPI)
+                                                "/v3/api-docs/**",
+                                                "/swagger-ui/**"
+                                        )
+                                        .permitAll()
+                                        .requestMatchers(
+                                                "/api/auth/register",
+                                                "/api/auth/login",
+                                                "/back-end/uploads/images/**",
+                                                "/api/back-end/uploads/images/**"
+                                        ).permitAll()
+                                        .anyRequest().authenticated()
+
                 );
 
-        // fix H2 database console: Refused to display ' in a frame because it set 'X-Frame-Options' to 'deny'
-        http.headers(headers -> headers.frameOptions(frameOption -> frameOption.sameOrigin()));
 
         http.authenticationProvider(authenticationProvider());
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+
 
         return http.build();
     }
@@ -117,4 +114,5 @@ public class SpringSecurityConfig {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
 }
