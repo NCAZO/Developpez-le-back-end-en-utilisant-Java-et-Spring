@@ -4,36 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0040ec70-254f-4918-8793-3ccdcdbf5694" name="Changes" comment="Work on JWT Auth&#10;Error TO FIX : Full authentication is required to access this resource&quot;,&quot;status&quot;:401">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/controllers/MessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/controllers/RentalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/controllers/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/dto/requests/LoginRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/dto/requests/MessageRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/dto/requests/RentalRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/dto/responses/AuthResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/dto/responses/RentalsResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/models/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/models/Rental.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/repository/MessageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/repository/RentalRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/MessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/RentalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/DTO/Requests/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/DTO/Requests/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/dto/requests/RegisterRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/DTO/Responses/AuthResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/DTO/Responses/MessageResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/dto/responses/MessageResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/config/AuthEntryPointJwt.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/config/AuthEntryPointJwt.java" afterDir="false" />
+    <list default="true" id="0040ec70-254f-4918-8793-3ccdcdbf5694" name="Changes" comment="Fix Owner ID &#10;Projet OK Fini">
+      <change afterPath="$PROJECT_DIR$/back-end/uploads/images/add-user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back-end/uploads/images/chevron-up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back-end/uploads/images/poubelle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/uploads/images/add-user.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/uploads/images/aeroport.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/uploads/images/avion.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/uploads/images/logout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/uploads/images/warning.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/config/AuthTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/config/AuthTokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/config/SpringSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/config/SpringSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/controllers/RentalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/controllers/RentalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/UserDetailsImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/UserDetailsImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/UserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/RentalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/RentalService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back-end/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,41 +58,41 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;JavaScript Debug.Angular Application.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Chatop [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.chatop [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.chatop [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ChatopApplication.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/OpenClassroom/Developpez-le-back-end-en-utilisant-Java-et-Spring/front-end&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\OpenClassroom\\Developpez-le-back-end-en-utilisant-Java-et-Spring\\front-end\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "JavaScript Debug.Angular Application.executor": "Run",
+    "Maven.Chatop [clean].executor": "Run",
+    "Maven.chatop [clean].executor": "Run",
+    "Maven.chatop [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ChatopApplication.executor": "Debug",
+    "git-widget-placeholder": "Dev",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/OpenClassroom/Developpez-le-back-end-en-utilisant-Java-et-Spring/front-end",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "ts.external.directory.path": "E:\\OpenClassroom\\Developpez-le-back-end-en-utilisant-Java-et-Spring\\front-end\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Spring Boot.ChatopApplication">
     <configuration name="Tests (estate)" type="JavaScriptTestRunnerKarma">
       <config-file value="$PROJECT_DIR$/karma.conf.js" />
@@ -124,6 +109,8 @@
       <envs>
         <env name="DB_USER" value="root" />
         <env name="DB_PASSWORD" value="root" />
+        <env name="DB_LINK" value="jdbc:mysql://localhost:3306/db_chatop" />
+        <env name="SECRET_KEY" value="28482B4D6251655468576D5A7134743777217A25432646294A404E635266556A" />
       </envs>
       <module name="chatop" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.openclassrooms.chatop.ChatopApplication" />
@@ -176,7 +163,7 @@
       <workItem from="1734607263963" duration="6556000" />
       <workItem from="1735287755360" duration="61000" />
       <workItem from="1735288467461" duration="3206000" />
-      <workItem from="1735293597879" duration="34304000" />
+      <workItem from="1735293597879" duration="41753000" />
     </task>
     <task id="LOCAL-00001" summary="Work on JWT Auth&#10;Error TO FIX : Full authentication is required to access this resource&quot;,&quot;status&quot;:401">
       <option name="closed" value="true" />
@@ -186,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732632031590</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Work on Rental create owner id">
+      <option name="closed" value="true" />
+      <created>1735833771692</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1735833771692</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,18 +189,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Work on JWT Auth&#10;Error TO FIX : Full authentication is required to access this resource&quot;,&quot;status&quot;:401" />
-    <option name="LAST_COMMIT_MESSAGE" value="Work on JWT Auth&#10;Error TO FIX : Full authentication is required to access this resource&quot;,&quot;status&quot;:401" />
+    <MESSAGE value="Work on Rental create owner id" />
+    <MESSAGE value="Fix Owner ID &#10;Projet OK Fini" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Owner ID &#10;Projet OK Fini" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/back-end/src/main/java/com/openclassrooms/chatop/services/RentalService.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="111" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.springframework.security.authentication.UsernamePasswordAuthenticationToken" memberName="principal" />
