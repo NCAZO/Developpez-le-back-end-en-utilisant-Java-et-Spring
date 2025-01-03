@@ -2,8 +2,6 @@
 
 Châtop est une application JAVA et Angular
 
-The frontend part is available here: [Châtop Frontend](https://github.com/AntoineCanda/Developpez-le-back-end-en-utilisant-Java-et-Spring), forked from OpenClassRooms projects.
-
 ## Prerequisites
 
 Les installations suivantes sont nécessaires pour lancer le projet :
