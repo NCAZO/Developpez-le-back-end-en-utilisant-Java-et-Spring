@@ -1,5 +1,6 @@
 package com.openclassrooms.chatop.dto.requests;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 
 public class LoginRequestDto {

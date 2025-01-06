@@ -1,5 +1,6 @@
 package com.openclassrooms.chatop.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +23,6 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    //    @JsonIgnore
     @Column(name = "password")
     private String password;
 
